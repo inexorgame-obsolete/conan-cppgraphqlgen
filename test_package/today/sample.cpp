@@ -60,19 +60,8 @@ int main(int argc, char** argv)
 	try
 	{
 		peg::ast query;
-
-		if (argc > 1)
-		{
-			query = peg::parseFile(argv[1]);
-		}
-		else
-		{
-			std::istream_iterator<char> start{ std::cin >> std::noskipws }, end{};
-			std::string input{ start, end };
-
-			query = peg::parseString(std::move(input));
-		}
-
+  		std::string input = "{ tasks{ edges{ node { title } } } }";
+		query = peg::parseString(std::move(input));
 		if (!query.root)
 		{
 			std::cerr << "Unknown error!" << std::endl;
